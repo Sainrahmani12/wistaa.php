@@ -106,12 +106,51 @@ class AuthController extends Controller
         
     }
 
-    public function responError($sts, $pesan)
+    public function editProfile(Request $request, $user_id)
     {
+        $user           = User::findOrfail($user_id);
+
+        $validasi = Validator::make($request->all(),[
+            'name'          =>'required',
+            'email'         =>'required',
+            'alamat'        =>'required',
+            'telp'          =>'required',
+        ]);
+
+        if($validasi->fails()){
+            $val = $validasi->errors()->all();
+            return $this -> responError(0, $val[0]);
+        }
+
+        $user->update([
+            'name'          =>$request->name,
+            'email'         =>$request->email,
+            'alamat'        =>$request->alamat,
+            'telp'          =>$request->telp,
+            'photo'         =>$request->photo
+        ]);
+
         return response()->json([
-            'status'    => $sts,
-            'message'   => $pesan
-        ], Response::HTTP_OK);
+            'status'        =>1,
+            'message'       =>"Profile berhasil diupdate",
+            'result'        =>$user
+        ]);
     }
 
+    // public function responError($sts, $pesan)
+    // {
+    //     return response()->json([
+    //         'status'    => $sts,
+    //         'message'   => $pesan
+    //     ], Response::HTTP_OK);
+    // }
+
+    // public function changePassword(Request $request, $user_id)
+    // {
+    //     $user = User::findOrFail($user_id);
+
+    //     if (!($Hash::chek($request->get('password'), $user->password))){
+            
+    //     }
+    // }
 }

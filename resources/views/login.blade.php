@@ -9,45 +9,31 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Doa Harian</title>
+    <title>Register</title>
 </head>
 
 <body>
     <div class="container text-center mt-5">
-        <h1>Doa Harian</h1>
-        <a href="{{route('post')}}">Post Data</a>
-        <br>
-        <a href="{{route('post-kategori')}}">Kategori</a>
-        <br>
-        <a href="{{route('post-wisata')}}">Wisata</a>
-        <br>
-        <a href="{{route('post-login')}}">login</a>
-    </div>
-    <div class="container mt-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Doa</th>
-                    <th scope="col">Ayat</th>
-                    <th scope="col">Latin</th>
-                    <th scope="col">Artinya</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($respone as $respon )
-                    <tr>
-                    <th scope="row">{{$i++}}</th>
-                    <td>{{$respon['doa']}}</td>
-                    <td>{{$respon['ayat']}}</td>
-                    <td>{{$respon['latin']}}</td>
-                    <td>{{$respon['artinya']}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <h1>Login</h1>
+        <a href="{{route('doa')}}">Back to Doa</a>
     </div>
 
+    <div class="container w-50 mt-5">
+        <form action="{{route('post-login')}}" method="post">
+            @csrf
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
