@@ -21,7 +21,7 @@
         <br>
         <a href="{{route('post-wisata')}}">Wisata</a>
         <br>
-        <a href="{{route('post-login')}}">login</a>
+        <a href="{{route('login')}}">login</a>
     </div>
     <div class="container mt-5">
         <table class="table">
