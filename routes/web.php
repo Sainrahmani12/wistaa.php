@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\WEB\DoaController;
+use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,4 @@ Route::post('/kategori', [DoaController::class,'nambahKategori'])->name('kategor
 Route::get('/post-wisata', [DoaController::class,'wisata'])->name('post-wisata');
 Route::get('/login', [DoaController::class, 'login'])->name('login');
 Route::post('/post-login', [DoaController::class, 'postingan'])->name('post-login');
+Route::post('/api', [Api::class, 'api'])->name('api');
