@@ -42,4 +42,4 @@ Route::get('/menu', [RestoranController::class, 'getAllMenu']);
 Route::get('/search', [RestoranController::class, 'cari']);
 
 // Edit password
-Route::put('/editpassword/{user_id}', [AuthController::class, 'editpassword']);
+Route::put('/editpassword/{user_id}', [AuthController::class, 'changePassword']);
