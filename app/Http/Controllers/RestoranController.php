@@ -92,4 +92,4 @@ class RestoranController extends Controller
             'pesan'         =>$msg
         ], Response::HTTP_NOT_FOUND);
     }
-}
+} 

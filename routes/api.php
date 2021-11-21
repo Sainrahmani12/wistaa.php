@@ -27,3 +27,19 @@ Route::put('/edit/{user_id}', [AuthController::class, 'editProfile']);
 //CRUD RESTO BESERTA MENUNYA
 Route::post('/add/resto-dan-menu', [RestoranController::class, 'createRestoMenu']);
 Route::get('/resto', [RestoranController::class, 'getRestoMenu']);
+
+// CRUD pada resto berdasarkan ID
+Route::post('/add/menu/{menu_id}', [RestoranController::class, 'create']);
+Route::delete('/del/menu/{resto_id}/{menu_id}', [RestoranController::class]);
+
+// Update resto saja
+Route::post('/edit/resto/{resto_id}', [RestoranController::class, 'editResto']);
+
+// Get semua menu
+Route::get('/menu', [RestoranController::class, 'getAllMenu']);
+
+// searching menu
+Route::get('/search', [RestoranController::class, 'cari']);
+
+// Edit password
+Route::put('/editpassword/(user_id)', [AuthController::class, 'editpassword']);

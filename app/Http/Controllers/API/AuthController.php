@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Facade\FlareClient\Http\Response as HttpResponse;
+use Illuminate\Auth\Access\Response as AccessResponse;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -137,20 +139,45 @@ class AuthController extends Controller
         ]);
     }
 
-    // public function responError($sts, $pesan)
-    // {
-    //     return response()->json([
-    //         'status'    => $sts,
-    //         'message'   => $pesan
-    //     ], Response::HTTP_OK);
-    // }
+    public function changePassword(Request $request, $user_id)
+    {
+        $user = User::findOrFail($user_id);
 
-    // public function changePassword(Request $request, $user_id)
-    // {
-    //     $user = User::findOrFail($user_id);
+        if ((!Hash::chek($request->password, $user->password))){
+            return $this->responError(0, "password is wrong !");
+        }
+        
+        if (strcmp($request->get('password'), $request->get('new_password'))== 0){
+            return Response()->json([
+                'status'            =>0,
+                'pesan'             =>'password tidak boleh sama'
+            ], 400);
+        }
 
-    //     if (!($Hash::chek($request->get('password'), $user->password))){
-            
-    //     }
-    // }
+        $validasi = Validator::make($request->all(),[
+            'password'          =>'required',
+            'new_password'      =>'required | confirmed'
+        ]);
+
+        if ($validasi->fails()){
+            $val = $validasi->errors()->all();
+            return $this->responError(0, $val[0]);
+        }$user->save();
+
+        // jika password baru sama dengan password lama maka error
+
+        return Response()->json([
+            'status'        => 1,
+            'pesan'         => "$user->name, Edit Berhasil",
+            'result'        => $user
+        ], Response::HTTP_OK);
+    }
+
+    public function responError($sts, $pesan)
+    {
+        return response()->json([
+            'status'    => $sts,
+            'message'   => $pesan
+        ], Response::HTTP_OK);
+    }
 }
