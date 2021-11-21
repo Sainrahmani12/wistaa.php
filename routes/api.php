@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/registrasi', [AuthController::class, 'registrasi']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::put('/edit/{user_id}', [AuthController::class, 'editProfile']);
+Route::put('/editpassword/{user_id}', [AuthController::class, 'editPassword']);
 
 //CRUD RESTO BESERTA MENUNYA
 Route::post('/add/resto-dan-menu', [RestoranController::class, 'createRestoMenu']);
@@ -42,4 +43,7 @@ Route::get('/menu', [RestoranController::class, 'getAllMenu']);
 Route::get('/search', [RestoranController::class, 'cari']);
 
 // Edit password
-Route::put('/editpassword/{user_id}', [AuthController::class, 'changePassword']);
+Route::put('/editpassword/{user_id}', [AuthController::class, 'editPassword']);
+
+// Edit profile
+Route::put('/editprofile/{user_id}', [AuthController::class, 'editProfile']);

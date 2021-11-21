@@ -139,7 +139,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function changePassword(Request $request, $user_id)
+    public function editPassword(Request $request, $user_id)
     {
         $user = User::findOrFail($user_id);
 
