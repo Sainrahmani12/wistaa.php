@@ -143,8 +143,12 @@ class AuthController extends Controller
     {
         $user = User::findOrFail($user_id);
 
-        if ((!Hash::chek($request->password, $user->password))){
-            return $this->responError(0, "password is wrong !");
+        if(!$user){
+            return $this->responError(0, 'Akun tidak terdaftar');
+        }
+
+        if (!(Hash::check($request->password, $user->password))){
+            return $this->responError(0, "Password tidak sama");
         }
         
         if (strcmp($request->get('password'), $request->get('new_password'))== 0){
@@ -162,7 +166,10 @@ class AuthController extends Controller
         if ($validasi->fails()){
             $val = $validasi->errors()->all();
             return $this->responError(0, $val[0]);
-        }$user->save();
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
 
         // jika password baru sama dengan password lama maka error
 

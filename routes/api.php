@@ -43,7 +43,7 @@ Route::get('/menu', [RestoranController::class, 'getAllMenu']);
 Route::get('/search', [RestoranController::class, 'cari']);
 
 // Edit password
-Route::put('/editpassword/{user_id}', [AuthController::class, 'editPassword']);
+// Route::put('/editpassword/{user_id}', [AuthController::class, 'editPassword']);
 
-// Edit profile
-Route::put('/editprofile/{user_id}', [AuthController::class, 'editProfile']);
+// // Edit profile
+// Route::put('/editprofile/{user_id}', [AuthController::class, 'editProfile']);
